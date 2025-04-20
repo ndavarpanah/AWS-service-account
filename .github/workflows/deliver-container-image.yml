@@ -77,6 +77,8 @@ jobs:
         run: |
           rm -rf ~/.cache/fulcio
           rm -rf ~/.sigstore
+          rm -rf /github/home/.cache/fulcio
+          rm -rf /github/home/.sigstore
           
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
