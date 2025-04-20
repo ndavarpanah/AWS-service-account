@@ -71,6 +71,13 @@ jobs:
           cache-to: type=gha,mode=max
           platforms: linux/amd64,linux/arm64
 
+      # ⚠️ Add this step to clear corrupted TUF metadata
+      - name: Clear cosign TUF and sigstore cache
+        if: github.event_name != 'pull_request'
+        run: |
+          rm -rf ~/.cache/fulcio
+          rm -rf ~/.sigstore
+          
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
       # repository is public to avoid leaking data.  If you would like to publish
